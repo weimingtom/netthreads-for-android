@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Place Finder</string>
+    <string name="current_location">Unknown</string>
+
+    <string name="activity_geocode">Find Location</string>
+	<string name="activity_about">About</string>
+
+	<string name="author">www.netthreads.co.uk</string>
+	<string name="copyright">(c) Alistair Rutherford</string>
+
+	<string name="main_no_items">No items</string>
+
+	<string name="about">About</string>
+	<string name="find">Find</string>
+    
+</resources>

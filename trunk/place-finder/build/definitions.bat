@@ -1,0 +1,1 @@
+set DEBUG_KEYSTORE=C:\Documents and Settings\Admin\Local Settings\Application Data\Android\debug.keystore
