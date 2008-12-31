@@ -18,8 +18,10 @@ package com.netthreads.android.command.processor;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import android.util.Log;
+
 /**
- * Implementation of command processor design pattern applied to lists of command actions.
+ * Implementation of classic command processor design pattern.
  * 
  */
 
@@ -43,6 +45,12 @@ public class CommandProcessor implements Runnable
 			instance = new CommandProcessor();
 		}
 
+		// Always make sure it's running
+		if (!instance.getRunning())
+		{
+			instance.start();
+		}
+		
 		return (instance);
 	}
     	
@@ -53,8 +61,6 @@ public class CommandProcessor implements Runnable
     private CommandProcessor()
     {
         commandsPending = new LinkedBlockingQueue<Command>();
-        
-        ThreadManager.instance().add(this);
     }
 
     /**
@@ -78,6 +84,8 @@ public class CommandProcessor implements Runnable
         {
             while (running)    // keep going
             {
+            	Log.d("process","waiting for command to execute");
+            	
                 // Block on waiting for command 
                 Command command = commandsPending.take();
 
@@ -111,6 +119,8 @@ public class CommandProcessor implements Runnable
 			running = false;
             throw new RuntimeException("An error occured while executing command", t);
         }
+        
+        Log.d("CommandProcessor", "process end");
     }
 
     /**
@@ -131,6 +141,15 @@ public class CommandProcessor implements Runnable
     public synchronized boolean getRunning()
     {
         return (running);
+    }
+ 
+    /**
+     * Start processing commands.
+     * 
+     */
+    private synchronized void start()
+    {
+        ThreadManager.instance().add(this);
     }
     
     /**

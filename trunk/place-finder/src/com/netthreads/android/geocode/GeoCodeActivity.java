@@ -158,6 +158,9 @@ public class GeoCodeActivity extends ListActivity
         {
         	geocodeCommand.cancel();
         }
+
+        // Kill the command processor
+        CommandProcessor.instance().stop();
     }
 	
     /**
