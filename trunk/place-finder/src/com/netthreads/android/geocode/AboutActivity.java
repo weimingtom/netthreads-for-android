@@ -50,5 +50,6 @@ public class AboutActivity extends Activity
 			Log.e("AboutActivity", "Package not found!");
 		} 
     }
+
 }
 
