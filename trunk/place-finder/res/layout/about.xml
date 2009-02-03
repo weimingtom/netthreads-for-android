@@ -40,7 +40,8 @@
 			<TextView android:id="@+id/text"
 			    android:layout_width="fill_parent" 
 			    android:layout_height="fill_parent"
-			    android:text="@string/author"
+			    android:text="@string/site"
+			    android:autoLink="web"
 			    android:gravity="center_horizontal"/>
 	    </TableRow>
 	
