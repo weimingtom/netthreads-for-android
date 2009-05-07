@@ -53,6 +53,17 @@ public class Sample
                 "<?xml version=\"1.0\" ?>\n<!DOCTYPE bulletml SYSTEM \"http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd\">\n\n<bulletml type=\"vertical\"\n          xmlns=\"http://www.asahi-net.or.jp/~cs8k-cyu/bulletml\">\n\n<action label=\"top\">\n<repeat><times>5</times>\n<action>\n <fire>\n  <direction type=\"absolute\">152</direction>\n  <bulletRef label=\"norm\"/>\n </fire>\n <repeat><times>8</times>\n <action>\n  <fire>\n   <direction type=\"sequence\">7</direction>\n   <bulletRef label=\"norm\"/>\n  </fire>\n </action>\n </repeat>\n <wait>8</wait>\n</action>\n</repeat>\n<wait>10</wait>\n<repeat><times>7</times>\n<action>\n <fire>\n  <direction type=\"absolute\">180-45+$rand*90</direction>\n  <bulletRef label=\"norm\"/>\n </fire>\n <repeat><times>4</times>\n <action>\n  <fire>\n   <direction type=\"sequence\">0</direction>\n   <speed>1.5</speed>\n   <bulletRef label=\"norm\"/>\n  </fire>\n  <wait>4</wait>\n </action>\n </repeat>\n</action>\n</repeat>\n<wait>10</wait>\n<repeat><times>12</times>\n<action>\n <fire>\n  <direction>0</direction>\n  <speed>2</speed>\n  <bulletRef label=\"norm\"/>\n </fire>\n <wait>6</wait>\n</action>\n</repeat>\n</action>\n\n<bullet label=\"norm\">\n<speed>1</speed>\n</bullet>\n\n</bulletml>\n"),
             new Sample("[XEVIOUS]_garu_zakato.xml",
                 "<?xml version=\"1.0\" ?>\n<!DOCTYPE bulletml SYSTEM \"http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd\">\n\n<bulletml type=\"vertical\"\n          xmlns=\"http://www.asahi-net.or.jp/~cs8k-cyu/bulletml\">\n\n<action label=\"top\">\n<fire>\n <direction type=\"absolute\">180</direction>\n <speed>3</speed>\n <bulletRef label=\"gzc\"/>\n</fire>\n</action>\n\n<bullet label=\"gzc\">\n<action>\n<wait>10+$rand*10</wait>\n<repeat><times>16</times>\n<action>\n <fire>\n  <direction type=\"sequence\">360/16</direction>\n  <bulletRef label=\"spr\"/>\n </fire>\n</action>\n</repeat>\n<repeat><times>4</times>\n<action>\n <fire>\n  <direction type=\"sequence\">90</direction>\n  <bulletRef label=\"hrmSpr\"/>\n </fire>\n</action>\n</repeat>\n<vanish/>\n</action>\n</bullet>\n\n<bullet label=\"spr\">\n<speed>2</speed>\n</bullet>\n\n<bullet label=\"hrmSpr\">\n<speed>0</speed>\n<action>\n<changeSpeed>\n <speed>2</speed>\n <term>60</term>\n</changeSpeed>\n</action>\n<action>\n<repeat><times>9999</times>\n<action>\n <changeDirection>\n  <direction type=\"aim\">0</direction>\n  <term>40</term>\n </changeDirection>\n <wait>1</wait>\n</action>\n</repeat>\n</action>\n</bullet>\n\n</bulletml>\n"),
+                
+            new Sample("daiou_r1_boss_1.xml",
+                ""),
+            new Sample("daiou_r1_boss_2.xml",
+                ""),
+            new Sample("daiou_r1_boss_3.xml",
+                ""),
+            new Sample("daiou_r1_boss_4.xml",
+                ""),
+            new Sample("daiou_r1_boss_5.xml",
+                ""),
         };
     public String name;
     public String context;
