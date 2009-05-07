@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<string name="help_text" >
+
+BulletML is a conversion of the Kenta Cho BulletML demo for the Android Platform.\n\n
+
+See 'About' for a link to the original demo.
+
+\n\n
+
+<b><u>Preferences</u></b>\n\n
+
+<b>Rank</b>\n\n
+
+Difficulty setting. Higher values make bullets harder to avoid.\n\n
+
+<b>Line Thickness</b>\n\n
+
+Draw line thickness.\n\n
+
+</string>
+	
+</resources>
