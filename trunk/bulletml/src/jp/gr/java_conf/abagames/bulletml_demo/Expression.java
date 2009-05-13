@@ -5,8 +5,6 @@
  */
 package jp.gr.java_conf.abagames.bulletml_demo;
 
-import jp.gr.java_conf.abagames.bulletml.*;
-
 import java.util.Random;
 
 

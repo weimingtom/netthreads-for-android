@@ -19,6 +19,10 @@
 	
 	<string name="help">Help</string>
 
+	<string name="dialog_ok">OK</string>
+
+	<string name="dialog_title">Profile Results</string>
+
     <string name="unknown">Unknown</string>
     
 	<!-- Shared Preferences -->

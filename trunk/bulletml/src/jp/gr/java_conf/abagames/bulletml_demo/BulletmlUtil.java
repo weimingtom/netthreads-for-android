@@ -5,8 +5,6 @@
  */
 package jp.gr.java_conf.abagames.bulletml_demo;
 
-import jp.gr.java_conf.abagames.bulletml.*;
-
 import java.util.Hashtable;
 
 
@@ -17,7 +15,8 @@ import java.util.Hashtable;
  */
 public class BulletmlUtil
 {
-    private static Hashtable expressions = new Hashtable();
+    private static Hashtable<String, Expression> expressions = new Hashtable<String, Expression>();
+    
     private static char[] expChr;
     private static float rank = 0.5f;
 

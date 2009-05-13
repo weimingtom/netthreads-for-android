@@ -20,4 +20,5 @@ public class StateData
 	// Control position
 	public float controlX = 0;
 	public float controlY = 0;
+	public boolean touched = false;
 }

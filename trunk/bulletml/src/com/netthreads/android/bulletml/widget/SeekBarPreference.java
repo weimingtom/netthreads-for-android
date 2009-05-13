@@ -29,10 +29,15 @@ import com.netthreads.android.bulletml.R;
  * SeekBar preference dialog control.
  * 
  * This component requires the 'seekbar_dialog' layout and drawable resource 'seekbar_icon'.
+ *
+ * CAVEAT: You _must_ call setProgress when you create the control. The method 'onSetInitialValue'
+ * won't get called unless the preference has actually been persisted which it won't be until 
+ * you attempt to access it. This wouldn't matter but we must have a value to set the pre title.
  * 
  */
 public class SeekBarPreference extends DialogPreference implements OnSeekBarChangeListener
 {
+	public static final int DEFAULT_MIN_VALUE = 1;
 	public static final int DEFAULT_MAX_VALUE = 100;
 	public static final int DEFAULT_VALUE = 0;
 	
@@ -42,7 +47,10 @@ public class SeekBarPreference extends DialogPreference implements OnSeekBarChan
 	private int initialValue = 0;
 	private int progressValue = 0;
 	
+	private int min = DEFAULT_MIN_VALUE;
+
 	private int max = DEFAULT_MAX_VALUE;
+	
 	private CharSequence title = "";
 	
 	/**
@@ -86,7 +94,7 @@ public class SeekBarPreference extends DialogPreference implements OnSeekBarChan
         
         setMax(DEFAULT_MAX_VALUE);
     }
-
+    
     /**
      * Load initial value from specified preference.
      * 
@@ -160,7 +168,14 @@ public class SeekBarPreference extends DialogPreference implements OnSeekBarChan
             return;
         }
         
-        progressValue = newValue;
+        if (progress>=min)
+        {
+        	progressValue = newValue;
+        }
+        else
+        {
+        	progressValue = min;
+        }
         
         // Update view.
         valueControl.setText(String.valueOf(progressValue));
@@ -216,6 +231,16 @@ public class SeekBarPreference extends DialogPreference implements OnSeekBarChan
 	public void setMax(int value) 
 	{
 		max = value;
+	}
+
+	public int getMin()
+	{
+		return min;
+	}
+
+	public void setMin(int min)
+	{
+		this.min = min;
 	}
 	
 	public int getProgress() 

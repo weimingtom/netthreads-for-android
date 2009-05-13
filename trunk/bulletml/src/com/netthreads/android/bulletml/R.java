@@ -63,14 +63,16 @@ public final class R {
         public static final int copyright=0x7f040008;
         /**  Shared Preferences 
          */
-        public static final int data_preferences=0x7f04000e;
+        public static final int data_preferences=0x7f040010;
+        public static final int dialog_ok=0x7f04000d;
+        public static final int dialog_title=0x7f04000e;
         public static final int help=0x7f04000c;
         public static final int help_text=0x7f040001;
-        public static final int line_thickness=0x7f040010;
+        public static final int line_thickness=0x7f040012;
         public static final int link_text=0x7f040000;
         public static final int main_no_items=0x7f040003;
-        public static final int rank=0x7f04000f;
+        public static final int rank=0x7f040011;
         public static final int settings=0x7f04000b;
-        public static final int unknown=0x7f04000d;
+        public static final int unknown=0x7f04000f;
     }
 }

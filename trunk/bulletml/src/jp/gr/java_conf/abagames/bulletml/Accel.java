@@ -6,7 +6,6 @@ import org.xml.sax.*;
 
 import java.io.*;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.parsers.*;

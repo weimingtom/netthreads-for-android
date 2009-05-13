@@ -16,11 +16,13 @@
 package com.netthreads.android.bulletml;
 
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
 import com.netthreads.android.bulletml.widget.SeekBarPreference;
+
 
 /**
  * Preferences settings activity.
@@ -30,7 +32,7 @@ import com.netthreads.android.bulletml.widget.SeekBarPreference;
 public class PreferencesActivity extends PreferenceActivity
 {
 	private SeekBarPreference rankPref = null;
-	private SeekBarPreference thicknessPref = null;
+	private SeekBarPreference lineWidthPref = null;
 	
     /*
      * View Create
@@ -75,12 +77,18 @@ public class PreferencesActivity extends PreferenceActivity
     /**
      * Build preference view.
      *
+     * (*) Annoyingly we have to do this. If you miss it out then the preference title will
+     * not get intialised properly. The reason for this is the at the control requires a 
+     * value for the default to exist.
+     * 
      * @return view
      */
     private PreferenceScreen createPreferenceScreen()
     {
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
 
+        ApplicationPreferences preferences = ApplicationPreferences.getInstance(this);
+        
         // ---------------------------------------------------------------
         // Preferences Category 
         // ---------------------------------------------------------------
@@ -88,24 +96,44 @@ public class PreferencesActivity extends PreferenceActivity
         inlinePrefCat.setTitle(R.string.data_preferences);
         root.addPreference(inlinePrefCat);
 
-        // Persist data slider
+        // Difficulty slider
         rankPref = new SeekBarPreference(this);
         
         rankPref.setKey(ApplicationPreferences.RANK_TEXT);
         rankPref.setTitle(ApplicationPreferences.RANK_TEXT);
-        rankPref.setMax(100);
+        rankPref.setMax(ApplicationPreferences.RANK_MAX);
+        rankPref.setProgress(preferences.getRank()); // See note (*)
 
         inlinePrefCat.addPreference(rankPref);
         
-        // Persist data slider
-        thicknessPref = new SeekBarPreference(this);
+        // Line width slider
+        lineWidthPref = new SeekBarPreference(this);
         
-        thicknessPref.setKey(ApplicationPreferences.LINE_THICKNESS_TEXT);
-        thicknessPref.setTitle(ApplicationPreferences.LINE_THICKNESS_TEXT);
-        thicknessPref.setMax(10);
+        lineWidthPref.setKey(ApplicationPreferences.LINE_WIDTH_TEXT);
+        lineWidthPref.setTitle(ApplicationPreferences.LINE_WIDTH_TEXT);
+        lineWidthPref.setMax(ApplicationPreferences.LINE_WIDTH_MAX);
+        lineWidthPref.setProgress(preferences.getLineWidth()); // See note (*)
         
-        inlinePrefCat.addPreference(thicknessPref);
+        inlinePrefCat.addPreference(lineWidthPref);
 
+        // OpenGL renderer
+        boolean rendererChecked = preferences.getOpenGL();
+        CheckBoxPreference rendererPref = new CheckBoxPreference(this);
+        rendererPref.setKey(ApplicationPreferences.OPENGL_RENDER_TEXT);
+        rendererPref.setTitle(ApplicationPreferences.OPENGL_RENDER_TEXT);
+        rendererPref.setChecked(rendererChecked);
+        
+        inlinePrefCat.addPreference(rendererPref);
+        
+        // Profile data switch
+        boolean profilerChecked = preferences.getShowProfile();
+        CheckBoxPreference profilerPref = new CheckBoxPreference(this);
+        profilerPref.setKey(ApplicationPreferences.SHOW_PROFILE_TEXT);
+        profilerPref.setTitle(ApplicationPreferences.SHOW_PROFILE_TEXT);
+        profilerPref.setChecked(profilerChecked);
+        
+        inlinePrefCat.addPreference(profilerPref);
+        
         return root;
     }
     

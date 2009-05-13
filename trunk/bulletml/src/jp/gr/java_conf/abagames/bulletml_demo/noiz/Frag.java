@@ -7,8 +7,6 @@ package jp.gr.java_conf.abagames.bulletml_demo.noiz;
 
 import java.util.Random;
 
-import android.graphics.Canvas;
-
 /**
  * Hit frag fireworks.
  *
@@ -52,8 +50,8 @@ public class Frag
         cnt--;
     }
 
-    public void draw(Canvas canvas)
+    public void draw(IScreen screen)
     {
-        gameManager.drawLine(canvas, x >> 4, y >> 4, px >> 4, py >> 4, COLOR);
+        gameManager.drawLine(screen, x >> 4, y >> 4, px >> 4, py >> 4, COLOR);
     }
 }

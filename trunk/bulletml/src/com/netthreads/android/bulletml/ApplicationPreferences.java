@@ -25,15 +25,23 @@ public class ApplicationPreferences
 {
 	public static final String NAME = "preferences";
 	
-	public static final String RANK_TEXT = "Rank";
-	public static final int RANK_DEFAULT = 50;
-
-	public static final String LINE_THICKNESS_TEXT = "Line Thickness";
-	public static final int LINE_THICKNESS_DEFAULT = 3;
+	public static final String RANK_TEXT = "Difficulty";
+	public static final int RANK_DEFAULT = 10;
+	public static final int RANK_MAX = 10;
 	
+	public static final String LINE_WIDTH_TEXT = "Line Width";
+	public static final int LINE_WIDTH_DEFAULT = 1;
+	public static final int LINE_WIDTH_MAX = 10;
+
+	public static final String SHOW_PROFILE_TEXT = "Show Profile";
+	public static final boolean SHOW_PROFILE_DEFAULT = false;
+
+	public static final String OPENGL_RENDER_TEXT = "OpenGL";
+	public static final boolean OPENGL_RENDER_DEFAULT = false;
+
 	public static final String SAMPLE_TEXT = "Samples";
 	public static final int SAMPLE_DEFAULT = 5; // 0==template
-
+	
 	// We use hex as these are bitmaps
 	public static final int UNCHANGED = 0x00;
 	public static final int CHANGED_SETTINGS = 0x01;
@@ -89,13 +97,13 @@ public class ApplicationPreferences
     }
 
     /**
-     * Return line thickness
+     * Return line width
      * 
      * @return value
      */
-    public int getLineThickness()
+    public int getLineWidth()
     {
-		int value = settings.getInt(LINE_THICKNESS_TEXT, LINE_THICKNESS_DEFAULT);
+		int value = settings.getInt(LINE_WIDTH_TEXT, LINE_WIDTH_DEFAULT);
 
 		return value;
     }
@@ -105,10 +113,10 @@ public class ApplicationPreferences
      *
      * @param The value
      */
-    public void setLineThickness(int value)
+    public void setLineWidth(int value)
     {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putInt(LINE_THICKNESS_TEXT, value);
+        editor.putInt(LINE_WIDTH_TEXT, value);
         editor.commit();
     }
     
@@ -147,5 +155,52 @@ public class ApplicationPreferences
         editor.putInt(SAMPLE_TEXT, value);
         editor.commit();
     } 
-    
+
+    /**
+     * Return profiler setting
+     * 
+     * @return value
+     */
+    public boolean getShowProfile()
+    {
+		boolean value = settings.getBoolean(SHOW_PROFILE_TEXT, SHOW_PROFILE_DEFAULT);
+
+		return value;
+    }
+
+    /**
+     * Set the profiler setting
+     *
+     * @param The value
+     */
+    public void setShowProfile(boolean value)
+    {
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean(SHOW_PROFILE_TEXT, value);
+        editor.commit();
+    }
+
+    /**
+     * Return renderer setting
+     * 
+     * @return value
+     */
+    public boolean getOpenGL()
+    {
+		boolean value = settings.getBoolean(OPENGL_RENDER_TEXT, OPENGL_RENDER_DEFAULT);
+
+		return value;
+    }
+
+    /**
+     * Set the renderer setting
+     *
+     * @param The value
+     */
+    public void setOpenGL(boolean value)
+    {
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean(OPENGL_RENDER_TEXT, value);
+        editor.commit();
+    }    
 }

@@ -11,8 +11,6 @@ import jp.gr.java_conf.abagames.bulletml.IActionElmChoice;
 import jp.gr.java_conf.abagames.bulletml.Speed;
 import jp.gr.java_conf.abagames.util.DegUtil;
 import jp.gr.java_conf.abagames.util.SCTable;
-import android.graphics.Canvas;
-
 
 /**
  * Bullet implementation.
@@ -209,8 +207,8 @@ public class BulletImpl
         }
     }
 
-    public void draw(Canvas canvas)
+    public void draw(IScreen screen)
     {
-        gameManager.drawLine(canvas, (x >> 4), (y >> 4), (px >> 4), (py >> 4), BULLET_COLOR[colorIndex]);
+        gameManager.drawLine(screen, (x >> 4), (y >> 4), (px >> 4), (py >> 4), BULLET_COLOR[colorIndex]);
     }
 }

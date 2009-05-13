@@ -9,15 +9,41 @@ See 'About' for a link to the original demo.
 
 \n\n
 
-<b><u>Preferences</u></b>\n\n
+<b><u>Preferences</u></b>
 
-<b>Rank</b>\n\n
+\n\n
 
-Difficulty setting. Higher values make bullets harder to avoid.\n\n
+<b>Difficulty</b>
 
-<b>Line Thickness</b>\n\n
+\n\n
 
-Draw line thickness.\n\n
+Set BulletML rank value. Not currently implemented.
+
+\n\n
+
+<b>Line Width</b>
+
+\n\n
+
+Draw line thickness. Does not currently work with OpenGL renderer.
+
+\n\n
+
+<b>OpenGL</b>
+
+\n\n
+
+Activate OpenGL renderer.
+
+\n\n
+
+<b>Show Profile</b>
+
+\n\n
+
+Show profiler results when you exit back to launch screen. Does not currently work with OpenGL renderer.
+
+\n\n
 
 </string>
 	

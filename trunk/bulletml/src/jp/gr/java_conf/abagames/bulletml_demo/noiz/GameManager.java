@@ -34,7 +34,6 @@ import com.netthreads.android.bulletml.data.StateData;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
 
@@ -101,7 +100,7 @@ public class GameManager
     	
     	paint = new Paint();
     	paint.setStyle(Paint.Style.STROKE);
-    	paint.setStrokeWidth(ApplicationPreferences.getInstance(context).getLineThickness());
+    	paint.setStrokeWidth(ApplicationPreferences.getInstance(context).getLineWidth());
     	
     	initGame();
 	}
@@ -204,7 +203,7 @@ public class GameManager
      * 
      * @param The draw canvas.
      */
-    public final void movePen(Canvas canvas)
+    public final void movePen(IScreen screen)
     {
         int i;
         BulletImpl bl;
@@ -238,7 +237,7 @@ public class GameManager
 	        yPosition = (((int)state.controlY)<<4)+8;
         }
 
-        drawLine(canvas, pxPosition>>4, pyPosition>>4, xPosition>>4, yPosition>>4, PEN_COLOR);
+        drawLine(screen, pxPosition>>4, pyPosition>>4, xPosition>>4, yPosition>>4, PEN_COLOR);
         
         oxPos = xPosition;
         oyPos = yPosition;
@@ -552,13 +551,13 @@ public class GameManager
      * 
      * @param The draw canvas
      */
-    private void drawBullets(Canvas canvas)
+    private void drawBullets(IScreen screen)
     {
         for (int i = BULLET_MAX - 1; i >= 0; i--)
         {
             if (bullet[i].x != BULLET_NOT_EXIST)
             {
-                bullet[i].draw(canvas);
+                bullet[i].draw(screen);
             }
         }
     }
@@ -584,13 +583,13 @@ public class GameManager
      * 
      * @param The draw canvas
      */
-    private void drawFrags(Canvas canvas)
+    private void drawFrags(IScreen screen)
     {
         for (int i = FRAG_MAX - 1; i >= 0; i--)
         {
             if (frag[i].cnt != Frag.NOT_EXIST)
             {
-                frag[i].draw(canvas);
+                frag[i].draw(screen);
             }
         }
     }
@@ -633,15 +632,16 @@ public class GameManager
      * 
      * @param canvas
      */
-    public void draw(Canvas canvas)
+    public void draw(IScreen screen)
     {
     	// Clear the screen
-    	canvas.drawARGB(0xFF,00,00,00);
+    	screen.clear();
     	
-	    drawBullets(canvas);
-	    drawFrags(canvas);
+	    drawBullets(screen);
 	    
-	    movePen(canvas);
+	    drawFrags(screen);
+	    
+	    movePen(screen);
     }
 
     /**
@@ -654,17 +654,9 @@ public class GameManager
      * @param y2
      * @param color
      */
-    public final void drawLine(Canvas canvas, int x1, int y1, int x2, int y2, int color)
+    public final void drawLine(IScreen screen, int x1, int y1, int x2, int y2, int color)
     {
-		float xa = x1;
-		float ya = y1;
-		float xb = x2;
-		float yb = y2;
-		
-		int c = 0xFF000000|color;
-		paint.setColor(c);
-
-		canvas.drawLine(xa, ya, xb, yb, paint);
+    	screen.drawLine(x1, y1, x2, y2, color);
     }
 
     

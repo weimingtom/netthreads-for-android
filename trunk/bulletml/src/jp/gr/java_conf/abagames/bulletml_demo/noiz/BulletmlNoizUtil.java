@@ -20,9 +20,9 @@ import java.util.Hashtable;
  */
 public class BulletmlNoizUtil
 {
-    private static Hashtable bullets = new Hashtable();
-    private static Hashtable actions = new Hashtable();
-    private static Hashtable fires = new Hashtable();
+    private static Hashtable<String, Bullet> bullets = new Hashtable<String, Bullet>();
+    private static Hashtable<String, Action> actions = new Hashtable<String, Action>();
+    private static Hashtable<String, Fire> fires = new Hashtable<String, Fire>();
 
     public static void clear()
     {
