@@ -133,7 +133,7 @@ public class CanvasActivity extends Activity
         
         gameManager.setHVStat(0);
         
-        BulletmlUtil.setRank(ApplicationPreferences.getInstance(this).getRank()/100);
+        BulletmlUtil.setRank(ApplicationPreferences.getInstance(this).getRankValue());
     }
     
     /**

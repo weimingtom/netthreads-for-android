@@ -20,6 +20,8 @@ import com.netthreads.android.bulletml.graphics.RendererGL;
  */
 public class GLActivity extends Activity
 {
+    public static final int SCREEN_OFFSET = 50; // GL screen height always -50 out.
+    
     private ControlGLSurfaceView glSurfaceView = null;
     
     private StateData state = null;
@@ -81,8 +83,8 @@ public class GLActivity extends Activity
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
         int displayWidth = displayMetrics.widthPixels;
-        int displayHeight = displayMetrics.heightPixels;
-        
+        int displayHeight = displayMetrics.heightPixels-SCREEN_OFFSET;
+
         state = new StateData();
 
         gameManager = new GameManager(this, state, displayWidth, displayHeight);
@@ -176,7 +178,7 @@ public class GLActivity extends Activity
         
         gameManager.setHVStat(0);
         
-        BulletmlUtil.setRank(ApplicationPreferences.getInstance(this).getRank()/100);
+        BulletmlUtil.setRank(ApplicationPreferences.getInstance(this).getRankValue());
     }
     
     /**

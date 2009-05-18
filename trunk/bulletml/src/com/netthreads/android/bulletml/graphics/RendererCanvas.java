@@ -17,7 +17,6 @@
 package com.netthreads.android.bulletml.graphics;
 
 import jp.gr.java_conf.abagames.bulletml_demo.noiz.GameManager;
-import jp.gr.java_conf.abagames.bulletml_demo.noiz.ScreenCanvas;
 import android.graphics.Canvas;
 
 /**

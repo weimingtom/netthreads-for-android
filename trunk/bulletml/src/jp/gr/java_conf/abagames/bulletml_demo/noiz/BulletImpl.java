@@ -5,6 +5,8 @@
  */
 package jp.gr.java_conf.abagames.bulletml_demo.noiz;
 
+import com.netthreads.android.bulletml.graphics.IScreen;
+
 import jp.gr.java_conf.abagames.bulletml.Bullet;
 import jp.gr.java_conf.abagames.bulletml.Direction;
 import jp.gr.java_conf.abagames.bulletml.IActionElmChoice;

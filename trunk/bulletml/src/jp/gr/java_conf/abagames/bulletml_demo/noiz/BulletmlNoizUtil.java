@@ -55,7 +55,7 @@ public class BulletmlNoizUtil
 
             if (blt == null)
             {
-                Log.d("getBulletElm", "unknown bullet label: " + label);
+                Log.e("getBulletElm", "unknown bullet label: " + label);
             }
 
             return blt;

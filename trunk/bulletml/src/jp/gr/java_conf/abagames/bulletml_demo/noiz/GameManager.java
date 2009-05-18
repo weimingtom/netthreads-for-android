@@ -31,6 +31,7 @@ import org.xml.sax.SAXException;
 
 import com.netthreads.android.bulletml.ApplicationPreferences;
 import com.netthreads.android.bulletml.data.StateData;
+import com.netthreads.android.bulletml.graphics.IScreen;
 
 import android.content.Context;
 import android.content.res.AssetManager;

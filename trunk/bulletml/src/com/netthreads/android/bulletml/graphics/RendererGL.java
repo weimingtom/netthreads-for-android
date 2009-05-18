@@ -24,16 +24,15 @@ import javax.microedition.khronos.opengles.GL11;
 import javax.microedition.khronos.opengles.GL11Ext;
 
 import jp.gr.java_conf.abagames.bulletml_demo.noiz.GameManager;
-import jp.gr.java_conf.abagames.bulletml_demo.noiz.ScreenGL;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
-import android.opengl.GLSurfaceView.EGLConfigChooser;
 import android.util.Log;
 
-import com.android.opengl.support.Grid;
+import com.netthreads.android.opengl.GLSurfaceView;
+import com.netthreads.android.opengl.Grid;
+import com.netthreads.android.opengl.GLSurfaceView.EGLConfigChooser;
 
 
 /**

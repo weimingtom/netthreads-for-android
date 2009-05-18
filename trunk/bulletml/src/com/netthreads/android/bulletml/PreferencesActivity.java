@@ -101,6 +101,7 @@ public class PreferencesActivity extends PreferenceActivity
         
         rankPref.setKey(ApplicationPreferences.RANK_TEXT);
         rankPref.setTitle(ApplicationPreferences.RANK_TEXT);
+        rankPref.setOffset(1);
         rankPref.setMax(ApplicationPreferences.RANK_MAX);
         rankPref.setProgress(preferences.getRank()); // See note (*)
 
@@ -111,6 +112,7 @@ public class PreferencesActivity extends PreferenceActivity
         
         lineWidthPref.setKey(ApplicationPreferences.LINE_WIDTH_TEXT);
         lineWidthPref.setTitle(ApplicationPreferences.LINE_WIDTH_TEXT);
+        lineWidthPref.setOffset(1);
         lineWidthPref.setMax(ApplicationPreferences.LINE_WIDTH_MAX);
         lineWidthPref.setProgress(preferences.getLineWidth()); // See note (*)
         

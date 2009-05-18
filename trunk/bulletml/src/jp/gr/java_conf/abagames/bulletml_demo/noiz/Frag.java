@@ -7,6 +7,8 @@ package jp.gr.java_conf.abagames.bulletml_demo.noiz;
 
 import java.util.Random;
 
+import com.netthreads.android.bulletml.graphics.IScreen;
+
 /**
  * Hit frag fireworks.
  *

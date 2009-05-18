@@ -25,53 +25,55 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.netthreads.android.bulletml.R;
 
+
 /**
  * SeekBar preference dialog control.
  * 
- * This component requires the 'seekbar_dialog' layout and drawable resource 'seekbar_icon'.
- *
- * CAVEAT: You _must_ call setProgress when you create the control. The method 'onSetInitialValue'
- * won't get called unless the preference has actually been persisted which it won't be until 
- * you attempt to access it. This wouldn't matter but we must have a value to set the pre title.
+ * This component requires the 'seekbar_dialog' layout and drawable resource
+ * 'seekbar_icon'.
+ * 
+ * CAVEAT: You _must_ call setProgress when you create the control. The method
+ * 'onSetInitialValue' won't get called unless the preference has actually been
+ * persisted which it won't be until you attempt to access it. This wouldn't
+ * matter but we must have a value to set the pre title.
  * 
  */
 public class SeekBarPreference extends DialogPreference implements OnSeekBarChangeListener
 {
-	public static final int DEFAULT_MIN_VALUE = 1;
-	public static final int DEFAULT_MAX_VALUE = 100;
-	public static final int DEFAULT_VALUE = 0;
-	
-	private SeekBar barControl = null;
-	private TextView valueControl = null;
-	
-	private int initialValue = 0;
-	private int progressValue = 0;
-	
-	private int min = DEFAULT_MIN_VALUE;
+    public static final int DEFAULT_MAX_VALUE = 100;
+    public static final int DEFAULT_VALUE = 0;
 
-	private int max = DEFAULT_MAX_VALUE;
-	
-	private CharSequence title = "";
-	
-	/**
-	 * Constructor.
-	 * 
-	 * @param context
-	 */
-	public SeekBarPreference(Context context) 
+    private SeekBar barControl = null;
+    private TextView valueControl = null;
+
+    private int initialValue = 0;
+    private int progressValue = 0;
+
+    private int offset = 0;
+
+    private int max = DEFAULT_MAX_VALUE;
+
+    private CharSequence title = "";
+
+    /**
+     * Constructor.
+     * 
+     * @param context
+     */
+    public SeekBarPreference(Context context)
     {
         super(context, null);
 
         initView();
     }
-    
+
     /**
-	 * Constructor.
+     * Constructor.
      * 
      * @param context
      * @param attrs
      */
-    public SeekBarPreference(Context context, AttributeSet attrs) 
+    public SeekBarPreference(Context context, AttributeSet attrs)
     {
         super(context, attrs);
 
@@ -80,7 +82,7 @@ public class SeekBarPreference extends DialogPreference implements OnSeekBarChan
 
     /**
      * Initialise view elements.
-     *  
+     * 
      */
     private void initView()
     {
@@ -91,179 +93,174 @@ public class SeekBarPreference extends DialogPreference implements OnSeekBarChan
 
         // Steal the XML dialogIcon attribute's value
         setDialogIcon(getContext().getResources().getDrawable(R.drawable.icon_seekbar));
-        
+
         setMax(DEFAULT_MAX_VALUE);
     }
-    
+
     /**
      * Load initial value from specified preference.
      * 
      * This is called _before_ the onBindDialogView.
      * 
-     * @param Restore flag.
-     * @param Default value.
+     * @param Restore
+     *            flag.
+     * @param Default
+     *            value.
      * 
      */
     @Override
-    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) 
+    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue)
     {
-    	initialValue = restorePersistedValue ? getPersistedInt(DEFAULT_VALUE) : DEFAULT_VALUE;
+        initialValue = restorePersistedValue ? getPersistedInt(DEFAULT_VALUE) : DEFAULT_VALUE;
 
-    	setProgress(initialValue);    	
+        setProgress(initialValue);
     }
-    
+
     /**
      * Called when preference selected by clicking on the title.
      * 
-     * @param The calling view.
+     * @param The
+     *            calling view.
      */
     @Override
-    protected void onBindDialogView(View view) 
+    protected void onBindDialogView(View view)
     {
         super.onBindDialogView(view);
-        
-        barControl = (SeekBar)view.findViewById(R.id.seekbar);
-        barControl.setMax(max);
+
+        barControl = (SeekBar) view.findViewById(R.id.seekbar);
+        barControl.setMax(max-offset);
         barControl.setProgress(progressValue);
         barControl.setOnSeekBarChangeListener(this);
-        
-        valueControl = (TextView)view.findViewById(R.id.seekbar_value);
-        valueControl.setText(String.valueOf(progressValue));
-        
+
+        valueControl = (TextView) view.findViewById(R.id.seekbar_value);
+        valueControl.setText(String.valueOf(progressValue+offset));
+
         setPersistent(true);
     }
-    
+
     /**
      * Called when we select Okay or Cancel.
      * 
-     * @param The result status.
+     * @param The
+     *            result status.
      */
-	@Override
-	protected void onDialogClosed(boolean positiveResult) 
-	{
-		super.onDialogClosed(positiveResult);
+    @Override
+    protected void onDialogClosed(boolean positiveResult)
+    {
+        super.onDialogClosed(positiveResult);
 
-		// Only persist if the dialog result is 'okay'
-		if (positiveResult)
-		{
-			setProgress(progressValue);
-			
-			// Map progress value back to title.
-			updateTitle();
-		}
-		else
-		{
-			// Reset the local value to the initial value.
-			progressValue = initialValue;
-		}
-	}
-    
-	@Override
-	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) 
-	{
-        int newValue = barControl.getProgress();
-        
-        if (!callChangeListener(newValue)) 
+        // Only persist if the dialog result is 'okay'
+        if (positiveResult)
         {
-            return;
-        }
-        
-        if (progress>=min)
-        {
-        	progressValue = newValue;
+            setProgress(progressValue);
+
+            // Map progress value back to title.
+            updateTitle();
         }
         else
         {
-        	progressValue = min;
+            // Reset the local value to the initial value.
+            progressValue = initialValue;
         }
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch)
+    {
+        int newValue = barControl.getProgress();
+
+        if (!callChangeListener(newValue))
+        {
+            return;
+        }
+
+        progressValue = newValue;
         
         // Update view.
-        valueControl.setText(String.valueOf(progressValue));
-	}
+        valueControl.setText(String.valueOf(progressValue+offset));
+    }
 
-	@Override
-	public void onStartTrackingTouch(SeekBar seekBar) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStopTrackingTouch(SeekBar seekBar) 
-	{
-		// TODO Auto-generated method stub
-		
-	}	
-
-	/**
-	 * Capture the actual title.
-	 * 
-	 * @param The raw title.
-	 */
-	@Override
-	public void setTitle(CharSequence title) 
-	{
-		super.setTitle(title);
-		
-		this.title = title;
-	}
-	
-	/**
-	 * Update title with value using raw string plus progress.
-	 * 
-	 */
-	public void updateTitle() 
-	{
-		String formatted = this.title+" ("+getProgress()+")";
-
-		super.setTitle(formatted);
-	}
-	
-    // -------------------------------------------------------------------
-	// Attributes
-    // -------------------------------------------------------------------
-    
-    public int getMax() 
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar)
     {
-		return max;
-	}
+        // TODO Auto-generated method stub
 
-	public void setMax(int value) 
-	{
-		max = value;
-	}
+    }
 
-	public int getMin()
-	{
-		return min;
-	}
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar)
+    {
+        // TODO Auto-generated method stub
 
-	public void setMin(int min)
-	{
-		this.min = min;
-	}
-	
-	public int getProgress() 
-	{
-		return progressValue;
-	}
+    }
 
-	/**
-	 * Set preference value.
-	 * 
-	 * @param value
-	 */
-	public void setProgress(int value) 
-	{
-		initialValue = value;
-		
+    /**
+     * Capture the actual title.
+     * 
+     * @param The
+     *            raw title.
+     */
+    @Override
+    public void setTitle(CharSequence title)
+    {
+        super.setTitle(title);
+
+        this.title = title;
+    }
+
+    /**
+     * Update title with value using raw string plus progress.
+     * 
+     */
+    public void updateTitle()
+    {
+        int total = getProgress()+offset;
+        
+        String formatted = this.title + " (" + total + ")";
+
+        super.setTitle(formatted);
+    }
+
+    // -------------------------------------------------------------------
+    // Attributes
+    // -------------------------------------------------------------------
+
+    public int getMax()
+    {
+        return max;
+    }
+
+    public void setMax(int value)
+    {
+        max = value;
+    }
+
+    public int getProgress()
+    {
+        return progressValue;
+    }
+
+    /**
+     * Set preference value.
+     * 
+     * @param value
+     */
+    public void setProgress(int value)
+    {
+        initialValue = value;
+
         progressValue = value;
 
         persistInt(value);
-	     
+
         notifyChanged();
-        
+
         updateTitle();
-	}
+    }
+
+    public void setOffset(int offset)
+    {
+        this.offset = offset;
+    }
 
 }

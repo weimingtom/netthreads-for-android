@@ -1,10 +1,10 @@
 package com.netthreads.android.bulletml.control;
 
 import android.content.Context;
-import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
 import com.netthreads.android.bulletml.data.StateData;
+import com.netthreads.android.opengl.GLSurfaceView;
 
 
 /**
