@@ -14,8 +14,6 @@ import android.graphics.Bitmap;
  */
 public class ScreenGL implements IScreen
 {
-	private static final float PERCENT_CONVERSION = 1.0f/255.0f;
-	
 	private GL10 surface = null;
 
 	private ByteBuffer byteBuffer = null;
@@ -60,22 +58,22 @@ public class ScreenGL implements IScreen
 		surface.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 	}
 
-	/**
-	 * Draw alpha blended line.
-	 * 
-	 * @param surface
-	 * @param x1
-	 * @param y1
-	 * @param x2
-	 * @param y2
-	 * @param color
-	 */
-	@Override
-	public void drawLine(int x1, int y1, int x2, int y2, int color)
-	{
-	    line[0] = x1<<16;
-	    line[1] = (screenHeight - y1)<<16;
-	    line[2] = 0;
+    /**
+     * Draw alpha blended line.
+     * 
+     * @param surface
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param color
+     */
+    @Override
+    public void drawLine(int x1, int y1, int x2, int y2, int color)
+    {
+        line[0] = x1<<16;
+        line[1] = (screenHeight - y1)<<16;
+        line[2] = 0;
         line[3] = x2<<16;
         line[4] = (screenHeight - y2)<<16;
         line[5] = 0;
@@ -87,32 +85,34 @@ public class ScreenGL implements IScreen
         intBuffer.position(0);
         
         surface.glVertexPointer(3, GL10.GL_FIXED, 0, intBuffer);
-	    
-		surface.glEnableClientState(GL10.GL_VERTEX_ARRAY); // Enable use of  vertex array
+        
+        surface.glEnableClientState(GL10.GL_VERTEX_ARRAY); // Enable use of  vertex array
 
-		// Colour values are passed as percentages.
-		float red = PERCENT_CONVERSION*((color >> 16) & 0xFF);
-		float green = PERCENT_CONVERSION*((color >> 8) & 0xFF);
-		float blue = PERCENT_CONVERSION*((color & 0xFF));
-
-		surface.glColor4f(red, green, blue, 0f);
-
-		/*
+        /*
+        private static final float PERCENT_CONVERSION = 1.0f/255.0f;
+        
         // Colour values are passed as percentages.
+        float red = PERCENT_CONVERSION*((color >> 16) & 0xFF);
+        float green = PERCENT_CONVERSION*((color >> 8) & 0xFF);
+        float blue = PERCENT_CONVERSION*((color & 0xFF));
+
+        surface.glColor4f(red, green, blue, 0f);
+        */
+
+        // Colour values are passed as percentages.
+        // Note: We might get even faster if we put this stuff in a lookup table.
         int red = (color&0x00FF0000);
         int green = (color&0x0000FF00)<<8;
         int blue = (color&0x000000FF)<<16;
 
-        surface.glColor4x(red, green, blue, 0);
-        */
-		
-		surface.glLineWidth(lineWidth);
+        surface.glColor4x(red/255, green/255, blue/255, 0);
+        
+        surface.glLineWidth(lineWidth);
 
-		surface.glDrawArrays(GL10.GL_LINES, 0, 2);
+        surface.glDrawArrays(GL10.GL_LINES, 0, 2);
 
-		surface.glDisableClientState(GL10.GL_VERTEX_ARRAY); // Disable use of  vertex array
-	}
-
+        surface.glDisableClientState(GL10.GL_VERTEX_ARRAY); // Disable use of  vertex array
+    }
 	/**
 	 * Draw bitmap to screen.
 	 * 
