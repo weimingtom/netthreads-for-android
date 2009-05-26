@@ -117,10 +117,10 @@ public class ScreenGL implements IScreen
             // Reset
             
             // UNCOMMENT THESE TO RUN ON THE EMULATOR. CRASHES ON THE PHONE
-//            lineIntBuffer.clear(); // Workaround
-//            lineIntBuffer.compact(); // Workaround
-//            colorIntBuffer.clear(); // Workaround
-//            colorIntBuffer.compact(); // Workaround
+            lineIntBuffer.clear(); // Workaround
+            lineIntBuffer.compact(); // Workaround
+            colorIntBuffer.clear(); // Workaround
+            colorIntBuffer.compact(); // Workaround
             
             lineIntBuffer.put(line);
             lineIntBuffer.position(0);

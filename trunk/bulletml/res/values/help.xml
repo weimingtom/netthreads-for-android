@@ -17,7 +17,7 @@ See 'About' for a link to the original demo.
 
 \n\n
 
-Set BulletML rank value. Not currently implemented.
+Set BulletML rank value..
 
 \n\n
 
@@ -41,7 +41,7 @@ Activate OpenGL renderer.
 
 \n\n
 
-Show profiler results when you exit back to launch screen. Does not currently work with OpenGL renderer.
+Show profiler results when you exit back to launch screen.
 
 \n\n
 
